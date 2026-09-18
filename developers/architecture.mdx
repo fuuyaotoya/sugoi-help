@@ -1,0 +1,84 @@
+---
+title: アーキテクチャ
+description: Dawn 無改変 vendoring + overlay + ビルド時フィルタリング — SUGOI Theme の技術構成
+---
+
+この章は SUGOI Theme を導入・カスタマイズする開発者向けの技術概要です。
+
+## コアコンセプト
+
+SUGOI Theme は Shopify 公式テーマ **Dawn を1バイトも改変せずに vendoring** し、その上に SUGOI 製セクションを **overlay として重ね**、ビルド時に
+
+- **(a) 出荷言語を ja / en に絞り**(Shopify の「1 locale ファイルあたり 3,400 翻訳」制限の回避)
+- **(b) 出荷セクションを業種プリセットで絞り込んで**
+
+`shopify theme check --fail-level error` を error 0 で通る1本のテーマパックとして出力します。
+
+## 設計思想
+
+| 原則 | 内容 |
+|---|---|
+| **Defensive & Non-Invasive** | Dawn の標準コードは可能な限り改変しない。機能追加はスニペットとして切り出し、セクションへの変更は「呼び出しの1行追加」に留める |
+| **Build-Time Switching** | ソースは全部入り(`src/` + `overlay/`)、出力はプリセットで絞った `dist/`。不要な Liquid ファイルや翻訳キーは Shopify サーバーにアップロードされない |
+| **No Runtime Bloat** | 実行時の肥大化なし。業種で使わない機能は出荷時点で存在しない |
+
+Dawn を無改変に保つ理由は単純です — Dawn のアップグレード指針は `git merge` であり、「既存ファイルを編集すると毎回手動コンフリクト解決が必要、新規ファイル追加なら自動マージが効く」。overlay 方式はこの追従コストを最小にします。
+
+## overlay と合成順序
+
+ビルドは後から書くものが勝つ優先順でファイルを合成します:
+
+| Step | ソース | 優先度 |
+|---|---|---|
+| 2 | `src/core/dawn/`(純正 Dawn) | 1(最低) |
+| 3 | `src/core/common/`(全業種共通) | 2 |
+| 4 | `src/packages/<pkg>/`(業種パッケージ) | 3 |
+| 4.6 | **`overlay/sugoi/`(SUGOI 開発ソース)** | 4(最高) |
+
+Dawn のファイルを差し替える必要がある場合は、`overlay/sugoi/` に同じ相対パスで置き、override マーカー(対象・理由・同期日付)を付けます。Dawn を bump したら上書き中のファイルに差分を取り込みます。
+
+## 命名規則(プレフィックス)
+
+ファイル名のプレフィックスで役割とビルド時の扱いを制御します:
+
+| プレフィックス | 分類 | ビルド時の扱い | 用途 |
+|---|---|---|---|
+| なし | Core | 常に残す | Dawn 由来の部品・共通インフラ |
+| `c-` | Common | 常に残す | 横断基盤の内部ロジック(スニペット中心) |
+| `sg-` | SUGOI Official | 選別する | マーチャントから見える公式汎用セクション |
+| `i-` | Industry | 選別する | 業種固有の機能 |
+| `p-` | Premium | 選別する | 上位グレード専用機能 |
+| `x-` | Experimental | **production ビルドで全除去** | 実験中の機能 |
+
+## 翻訳管理(i18n)
+
+- Dawn 標準の翻訳キーはそのまま使う
+- 独自機能は専用ネームスペースのキーを切り、schema ラベルは `t:` 参照にする
+- ビルド時に「実際に使われているキー + ホワイトリスト」だけを残して locale JSON を生成(ツリーシェイキング)
+
+## 品質ゲート
+
+出荷は以下を全て通過した状態でのみ行われます:
+
+- `shopify theme check --fail-level error` — エラー 0
+- 3ブラウザ(Chromium / Firefox / WebKit)の E2E テスト
+- WCAG アクセシビリティ検証(axe)
+- ja / en 両言語の同時出荷確認
+
+## セクションのモジュラー形式
+
+各セクションはディレクトリ単位で自己完結します:
+
+```
+overlay/sugoi/sections/sg-<name>/
+├── section.liquid      # セクション本体
+├── README.md           # 設計判断・導入手順・データ契約
+├── assets/             # セクション固有の CSS / JS
+└── i18n/
+    ├── schema.ja.json  # schema ラベル翻訳
+    ├── schema.en.json
+    ├── template.ja.json
+    └── template.en.json
+```
+
+ビルド時にフラット化され、Shopify 標準の配置(`sections/`, `assets/`, `locales/`)へ展開されます。

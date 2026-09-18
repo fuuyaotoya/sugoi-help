@@ -1,0 +1,78 @@
+---
+title: Favorites
+description: A no-login favorites page. Pick two or three items to compare price, stock, and specs side by side, then continue to add-to-cart or a consultation with the AI chat
+---
+
+A page section that lists favorited products. Favorites are stored in the shopper's browser, so **no login is required — guests can use it** (items are added with the heart button on product cards).
+
+Pick two or three items from the list and a **comparison table** opens, showing price, stock, and specs side by side. From there, shoppers can hand the comparison to the AI chat for advice, or add items straight to the cart.
+
+## Key features
+
+- **Favorites list** — added products shown in a grid. Prices are re-fetched fresh at display time
+- **Comparison table** — price, stock, and spec rows for the two or three selected items, side by side
+- **Variant selection and add-to-cart** — pick size and color from the comparison table and add to the cart (sold-out options cannot be selected)
+- **AI chat handoff** — consult the concierge via the "Ask the concierge" button, with the comparison attached
+
+## What the comparison table shows
+
+| Row | Contents |
+|---|---|
+| Price | The current price, re-fetched at display time. Shown as a range when variants differ in price; shown as a sale when a compare-at price exists |
+| Stock | Products with a single option axis list the purchasable values; multi-axis products show the number of selectable combinations |
+| Spec rows (added as blocks) | Displayed from each product's metafields. Products without a value show "No information" — nothing is filled in speculatively |
+| Variants | Selected per product via dropdown (sold-out options cannot be chosen) |
+| Actions | Open the product page / add to cart |
+
+<Note>
+Prices are not snapshots from the moment an item was favorited — the latest price is re-fetched at display time. Price changes and sales are reflected, and deleted or unpublished products appear as "No longer available."
+</Note>
+
+## Handing off to the AI chat
+
+Pressing "Ask the concierge" on the comparison table opens the AI chat with the selected products and the spec comparison attached, ready for a consultation. The handed-off context expires after a set period (one hour).
+
+If no chat feature is present on the page, the button itself does not appear, and the section works purely as a compare-and-buy feature. For chat details, see [SUGOI Chat integration](/en/integrations/sugoi-chat).
+
+## How to use it
+
+1. In the Theme Editor, open the favorites page and add the "Favorites" section (one per page)
+2. Add spec rows (material, fit, and so on) as blocks to include in the comparison table
+3. Spec rows read each product's metafields — see [Metafield setup](/en/setup/metafields) to define and populate them
+
+## Section settings
+
+| Setting | Type | Default | Description |
+|---|---|---|---|
+| Heading | Text | Empty | Blank uses the default wording |
+| Show heading | Checkbox | ON | Turn off when it duplicates the page title |
+| "Browse products" link | URL | Empty | Where the button shown when favorites are empty links |
+| Enable comparison | Checkbox | ON | Provides two-to-three item comparison and chat handoff |
+| Metafield namespace | Text | Empty | The namespace to read spec rows from. Blank inherits the theme-wide namespace (default `custom`) |
+| Metaobject reference key | Text | Empty | Optional. When a product metafield value is a metaobject reference, row data is also read from that value |
+| Color scheme | Color scheme | scheme-1 | The section's colors |
+
+## Blocks
+
+### Spec row (compare_row / limit 8)
+
+Adds one row to the comparison table.
+
+| Setting | Type | Default | Description |
+|---|---|---|---|
+| Row label | Text | Empty | The row heading in the comparison table (e.g., Material) |
+| Metafield key | Text | Empty | The key to read from each product's metafields. Products with an empty value show "No information" |
+
+## Troubleshooting
+
+**Favorites do not carry over to other devices**
+
+Favorites live in the shopper's browser and are not synced across devices (by design). To keep them as account data, consider the account integration features.
+
+**Specs in the comparison table show "No information"**
+
+The metafield for that spec row is not filled in on the product. Cells without a value are shown as "No information" rather than padded with blanks or guesses. Also check that the namespace and key are specified correctly.
+
+**The add-to-cart button cannot be pressed**
+
+By design, the button is disabled when no variant (size, color, etc.) is selected, or when the selected variant is sold out.

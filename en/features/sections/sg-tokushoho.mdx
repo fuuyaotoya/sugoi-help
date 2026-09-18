@@ -1,0 +1,82 @@
+---
+title: Specified Commercial Transactions Act Disclosures
+description: A section that lays out the legally required items for online sellers as a definition list. The theme provides the framework of item names; the store owner fills in the contents
+---
+
+A dedicated section for displaying the disclosures required by Japan's Specified Commercial Transactions Act. It arranges, in a definition-list format, the statutory items that online sellers in Japan are legally required to display.
+
+The section provides only the **framework of item names (what must be disclosed)** — everything displayed is entered by the store owner.
+
+<Warning>
+The legal adequacy of what this section displays is the store operator's responsibility. False or outdated disclosures can violate the Specified Commercial Transactions Act (Article 11) and the Act against Unjustifiable Premiums and Misleading Representations. The theme ships with no sample business data whatsoever — fill in every item with your own real data. For staying current with legal amendments, consult your legal counsel.
+</Warning>
+
+## Required items (Specified Commercial Transactions Act, Article 11 — online sales)
+
+The bundled page template (`page.tokushoho`) pre-arranges the following 13 items with their names in place. The store owner only fills in the values. Highlighting is recommended for the three items covering shipping fees, returns, and defective goods.
+
+| # | Item | Legal basis |
+|---|---|---|
+| 1 | Seller name | Name (personal or corporate) |
+| 2 | Person responsible for operations | Representative's name |
+| 3 | Address | Address |
+| 4 | Phone number | Phone number |
+| 5 | Email address | Email address |
+| 6 | Service hours | Business hours |
+| 7 | Price | Selling price |
+| 8 | Shipping fees (highlight) | Costs borne in addition to the price |
+| 9 | Payment methods | Timing and method of payment |
+| 10 | Charges other than the product price | Costs borne in addition to the price |
+| 11 | Delivery timing | Timing of delivery of goods |
+| 12 | Returns and exchanges (highlight) | Withdrawal or cancellation of the order (return policy) |
+| 13 | Handling of defective goods (highlight) | Treatment of defective goods |
+
+## How to use it
+
+1. In the Shopify admin, create a page with a title such as "Disclosure under the Specified Commercial Transactions Act"
+2. Set the page's template to `page.tokushoho` — the 13 statutory items appear with their names in place
+3. Fill in each item's content in the Theme Editor. Items left unfilled render as blank rows
+4. Set the last-updated date to the publish date
+
+The section can also be added on its own from the Theme Editor (it starts with a single empty item).
+
+## Blocks
+
+### Item (row / limit 30)
+
+Becomes one row of the disclosure.
+
+| Setting | Type | Default | Description |
+|---|---|---|---|
+| Item name | Text | Item name | e.g., Seller name |
+| Content | Text area (multi-line) | Empty | Enter your business's real data |
+| Highlight as an important item | Checkbox | OFF | Adds an accent bar on the left and a light background so the row is harder to skim past (recommended for shipping fees, returns, defective goods) |
+
+## Section settings
+
+| Setting | Type | Default | Description |
+|---|---|---|---|
+| Heading | Text | Disclosure under the Specified Commercial Transactions Act | The page heading |
+| Last updated | Text | Empty | e.g., "Last updated: May 13, 2026". Hidden when blank |
+| Contact card: heading | Text | Questions? Contact us | Shown on the card below the table |
+| Contact card: service hours | Text | Empty | e.g., "Weekdays 10:00-18:00". Hidden when blank |
+| Contact card: button label | Text | Go to the contact form | The button inside the card |
+| Contact card: button link | URL | Empty | Usually your contact form page |
+| Color scheme | Color scheme | scheme-1 | The section's colors |
+| Top and bottom padding | Range (px) | 36 / 36 | The section's padding |
+
+The contact card appears **only when its heading, service hours, button label, and link are all configured**. To omit it, leave the fields blank (with no link set, the button points to `#`).
+
+## Troubleshooting
+
+**Items I have not filled in appear as blank rows**
+
+By design. Rather than hiding items individually, unfilled rows are output blank. Fill in and publish every item (publishing with blanks leaves gaps that create legal risk).
+
+**The contact card does not appear**
+
+Check that all four fields — heading, service hours, button label, and button link — are filled in. If any one of them is blank, the entire card is hidden.
+
+## Related
+
+- [Japanese ecommerce essentials](/en/features/japan-ec) — an overview of Japan-focused features such as noshi gifting and preferred delivery dates
