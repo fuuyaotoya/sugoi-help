@@ -1,0 +1,25 @@
+---
+title: Breadcrumbs
+description: A breadcrumb trail showing the hierarchy to the current page (home → collection → product), with structured-data output for search engines
+---
+
+A section that displays breadcrumbs showing the hierarchy leading to the current page (home → collection → product, and so on). It can also output BreadcrumbList structured data for search engines, helping SEO.
+
+![Breadcrumbs above the page content](/en/images/sg-breadcrumbs.png)
+
+## How to add it
+
+Open the theme editor (in the admin: "Online store → Themes → Customize"), and on the page where you want it, choose **"Breadcrumbs"** from "Add section". It can be added to **product, collection, blog post, and static page** templates. Proven on page templates such as About and FAQ.
+
+<Note>
+A product page's parent collection is the first of the collections registered on the product in the admin. If the collection shown isn't the one you intended, check the collection registration order on the product's edit screen.
+</Note>
+
+## Settings
+
+- **Show breadcrumbs**: Toggles the breadcrumb display (default ON)
+- **Output structured data (JSON-LD)**: Outputs BreadcrumbList structured data for search engines (default ON). If another section outputs the same structured data, turn this off to avoid duplication
+- **HOME label**: The text of the leftmost item. Blank uses the translation default ("Home")
+- **Separator**: Choose the symbol between items from "› (chevron) / / (slash) / → (arrow) / — (hyphen)" (default: chevron)
+- **Color scheme**: The section's color scheme
+- **Top / Bottom**: Padding above and below the section (default 8 / 8)

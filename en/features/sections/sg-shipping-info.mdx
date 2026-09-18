@@ -1,0 +1,59 @@
+---
+title: Shipping & Fees
+description: A section that displays regional shipping fees and delivery times in a table. Rows come from a metaobject or manual entry, and a COD fee table can be added alongside
+---
+
+A section that displays regional shipping fees and delivery times in table form. It can also present the carrier name and the free-shipping threshold, and suits shipping information pages and the cart page. Row data can come from a metaobject or be entered manually as blocks.
+
+![The shipping information section](/en/images/sg-shipping-info.png)
+
+## How to add it
+
+Open the theme editor (in the admin: "Online store → Themes → Customize"), and on the page where you want it, choose **"Shipping & fees"** from "Add section". It can be added to any page type (except header and footer areas). Proven on shipping information pages and the cart page.
+
+<Warning>
+The fees shown are **estimates** entered by the store. The actual amount is finalized at checkout. This disclaimer is always shown alongside the table and cannot be removed by settings.
+</Warning>
+
+## Settings
+
+- **Heading**: The section heading (default: About shipping and fees)
+- **Intro text**: Explanatory text shown before the table. Hidden when blank
+- **Carrier name**: Enter the name of the carrier you use. It differs store by store, so the theme ships with no default. Hidden when blank
+- **Carrier link**: Sets a link on the carrier name. Blank shows plain text
+- **Show free-shipping threshold**: Shows the amount configured in theme settings (Cart → free-shipping bar threshold). On product pages, the guidance under the buy button shows the same amount, so this defaults to off. Turn it on only when placing the section on a shipping information page (default OFF)
+- **Show delivery-time column**: Shows a delivery-time column in the table (default ON)
+- **Data source**: Choose from "Auto (recommended) / Metaobject / Blocks (manual entry)". Auto searches metaobject → blocks in order, and shows no fee table if both are empty (default: auto)
+- **Shipping zone metaobject**: Choose a `shipping_zone`-type metaobject. Each entry becomes one row, with field keys region / fee / fee_text / eta / note. If the definition doesn't exist on your store, leave this blank and enter rows as blocks (create the definition in the admin under "Settings → Custom data → Metaobjects")
+- **Color scheme**: The section's color scheme
+- **Top / Bottom**: Padding above and below the section (default 36 / 36)
+
+## Blocks
+
+### Region shipping row
+
+One row of the fee table.
+
+- **Region**: The row's target region (e.g., Honshu)
+- **Fee**: Enter the shipping amount. Values use the currency's smallest unit, same as the cart total, so **Japanese yen is entered ×100** (¥800 is `80000`). Left at 0, the "fee display text" below is used instead
+- **Fee display text**: For values that aren't a simple amount — "Free", "At cost", "From ¥800", and so on. When entered, it takes precedence over the numeric value above
+- **Delivery time**: Enter values like "2-3 days". The theme shows no times it cannot stand behind, so there is no default. Blank hides the time cell
+- **Note**: A supplementary note attached to the row
+
+### COD fee row
+
+One row of the cash-on-delivery (COD) fee table. Lay out fees per order-value band.
+
+- **Order value**: The order-value band the fee applies to (e.g., Up to ¥10,000)
+- **Fee**: Enter the fee. Same smallest-currency-unit rule as shipping — **Japanese yen is ×100** (¥330 is `33000`). Left at 0, the "fee display text" below is used instead
+- **Fee display text**: The display text for values that aren't a simple amount
+
+### Footnote
+
+Supplementary text placed beneath the table (rich text).
+
+- **Footnote text**: Notes such as surcharges (default: Additional charges may apply depending on the region.)
+
+<Note>
+The currency unit is the classic source of fee-entry mistakes. Across all of Shopify, Japanese yen is entered not in yen but in sen (1/100 yen). If in doubt, skip the number and write the fee directly in the "fee display text" — "¥800".
+</Note>

@@ -1,0 +1,58 @@
+---
+title: AI Chat Integration
+description: The AI chat connection URL, privacy-related settings, sales measurement, and the sources for rankings and outfit suggestions
+---
+
+## AI chat integration settings
+
+The storefront AI chat (SUGOI AI chat) appears once its connection is set here. For a feature introduction and the app-side steps, see the [SUGOI Chat integration guide](/en/integrations/sugoi-chat).
+
+In the theme editor, open **Theme settings → AI chat integration**.
+
+### Connection
+
+**AI chat connection URL** — Enter the connection URL provided by the AI chat app. While it is blank, the chat is not shown. When changing the connection, keep it consistent with the app-side setting.
+
+### Display
+
+**Reveal answers gradually** — When enabled, AI replies stream in as they are generated. When disabled, each reply appears all at once once complete.
+
+### Privacy-related (all OFF by default)
+
+**Use the customer's activity for product suggestions** — Sends the signed-in shopper's ID, order count, and lifetime total to the AI chat. Used solely as a hint for product suggestions — never for order lookup or displaying personal information.
+
+**Answer order status for logged-in customers** — Sends the recent order number, date, delivery status, tracking number, and order status page URL to the AI chat. Names, addresses, and email addresses are not sent. Shoppers who are not signed in are invited to log in.
+
+**Use the AI-estimated delivery region** — Stores the prefecture and region estimated by the AI chat on the shopper's device, only with their consent. No address is collected or sent. Delivery-date calculation is managed on the companion app side.
+
+**Save preferences with consent** — Saves preferences such as size and color only when the shopper consents. Shows the consent choice and a privacy notice.
+
+### Context (recommended settings)
+
+**Tell the AI about recently viewed products** — Sends products recently viewed in this browser as conversation hints. Useful for questions about "that item I was just looking at." ON by default.
+
+**Number of browsing-history items to share with the AI** — The maximum number of recently viewed products to send (choose 3-10).
+
+**Reflect AI-suggested sizes in product displays** — Applies the size the shopper consented to, to the product page's size selection. Works only when the product-side size settings are also enabled, and changes nothing if no matching size exists.
+
+### Sources for rankings and outfit suggestions
+
+**Collection the AI uses for rankings** — Choose the collection referenced for questions like "popular items". If unselected, ranking information is not sent to the AI. This is separate from the top page's ranking display.
+
+**Number of ranking items the AI introduces** — The maximum number of products the AI mentions in a reply (3-8). Set separately from the on-page ranking display count.
+
+**Collections the AI uses for outfit suggestions** — Enter the handles of the collections to use as outfit-suggestion sources, comma-separated. If blank, outfit information is not sent to the AI.
+
+**Show prices in outfit suggestions** — When enabled, the AI shows prices for the products in the outfits it presents.
+
+### Measurement
+
+**Measure chat-driven sales** — To identify orders that came through chat, adds the session ID and suggested products to the cart record. Conversation text is never stored. Options:
+
+- **Don't measure (off)**
+- **Record from the theme (ajax)** — Default. The theme writes directly to the cart record
+- **Record via the app (backend)** — Requires an allowed-store configuration on the companion app side
+
+<Note>
+The settings that touch shopper privacy (customer activity, order status, delivery region) are all OFF by default. Enable only the features you need.
+</Note>

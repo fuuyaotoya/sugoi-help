@@ -1,0 +1,39 @@
+---
+title: Quick View
+description: A section that provides the contents of the modal opened by the "Quick shop" button in product listings — variant selection and a buy button in compact form
+---
+
+A section providing the contents of the modal (popover window) that opens when shoppers press the quick-view button on cards in product listings and elsewhere. Nothing of it is visible on the page itself; the modal shows compact product information — variant selection and a buy button. Shoppers can go all the way to purchase in place, without page navigation.
+
+![The quick view modal opened from a product card](/en/images/sg-quick-view.png)
+
+## How to add it
+
+Open the theme editor (in the admin: "Online store → Themes → Customize"), and in the **product page** template, choose **"Quick view"** from "Add section".
+
+<Warning>
+This section **must be placed in the product page template**. The modal's contents are fetched through the product page URL — remove it from the product template and quick view stops working on every page, including listings. The section itself is not visible on the product page (it is an invisible, modal-only section).
+</Warning>
+
+## Settings
+
+- **Show brand**: Shows the product vendor (brand name) in the modal (default ON)
+- **Color scheme**: The modal's color scheme
+
+## Blocks
+
+### Variant picker (limit 1)
+
+The UI for choosing variations such as size and color.
+
+- **Style**: Choose the selection UI's look from "Pill buttons" or "Dropdown" (default: pill buttons)
+
+### Buy button (limit 1)
+
+The add-to-cart button.
+
+- **Dynamic checkout button**: Shows the shopper's preferred payment options, such as Shop Pay (default OFF)
+
+<Note>
+The quick-view launch button is controlled by the product card's settings. This section is responsible only for what appears once it opens.
+</Note>

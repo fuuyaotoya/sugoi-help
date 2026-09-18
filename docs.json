@@ -13,13 +13,151 @@
       {
         "language": "ja",
         "groups": [
-          { "group": "はじめに", "pages": ["index"] }
+          {
+            "group": "はじめに",
+            "pages": [
+              "index",
+              "intro"
+            ]
+          },
+          {
+            "group": "テーマ設定",
+            "pages": [
+              "theme-settings/index",
+              {
+                "group": "SUGOI 設定",
+                "pages": [
+                  "theme-settings/license",
+                  "theme-settings/chat",
+                  "theme-settings/gift",
+                  "theme-settings/purchase-confidence",
+                  "theme-settings/structured-data",
+                  "theme-settings/editorial",
+                  "theme-settings/appearance"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "セクションリファレンス",
+            "pages": [
+              {
+                "group": "SUGOI セクション",
+                "pages": [
+                  "features/sections/sg-media-hero",
+                  "features/sections/sg-shape-navigation",
+                  "features/sections/sg-curated-products",
+                  "features/sections/sg-editorial-story",
+                  "features/sections/sg-about-hero",
+                  "features/sections/sg-about-guide",
+                  "features/sections/sg-quick-view",
+                  "features/sections/sg-recently-viewed",
+                  "features/sections/sg-favorites",
+                  "features/sections/sg-breadcrumbs",
+                  "features/sections/sg-faq",
+                  "features/sections/sg-shipping-info",
+                  "features/sections/sg-tokushoho",
+                  "features/sections/sg-chat-concierge",
+                  "features/sections/sg-fit-playroom"
+                ]
+              },
+              "features/japan-ec"
+            ]
+          },
+          {
+            "group": "連携ガイド",
+            "pages": [
+              "integrations/sugoi-chat",
+              "integrations/mysize"
+            ]
+          },
+          {
+            "group": "開発者向け",
+            "pages": [
+              "developers/architecture"
+            ]
+          },
+          {
+            "group": "その他",
+            "pages": [
+              "changelog"
+            ]
+          }
         ]
       },
       {
         "language": "en",
         "groups": [
-          { "group": "Getting Started", "pages": ["en/index"] }
+          {
+            "group": "Getting Started",
+            "pages": [
+              "en/index",
+              "en/intro"
+            ]
+          },
+          {
+            "group": "Theme Settings",
+            "pages": [
+              "en/theme-settings/index",
+              {
+                "group": "SUGOI Settings",
+                "pages": [
+                  "en/theme-settings/license",
+                  "en/theme-settings/chat",
+                  "en/theme-settings/gift",
+                  "en/theme-settings/purchase-confidence",
+                  "en/theme-settings/structured-data",
+                  "en/theme-settings/editorial",
+                  "en/theme-settings/appearance"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Section Reference",
+            "pages": [
+              {
+                "group": "SUGOI Sections",
+                "pages": [
+                  "en/features/sections/sg-media-hero",
+                  "en/features/sections/sg-shape-navigation",
+                  "en/features/sections/sg-curated-products",
+                  "en/features/sections/sg-editorial-story",
+                  "en/features/sections/sg-about-hero",
+                  "en/features/sections/sg-about-guide",
+                  "en/features/sections/sg-quick-view",
+                  "en/features/sections/sg-recently-viewed",
+                  "en/features/sections/sg-favorites",
+                  "en/features/sections/sg-breadcrumbs",
+                  "en/features/sections/sg-faq",
+                  "en/features/sections/sg-shipping-info",
+                  "en/features/sections/sg-tokushoho",
+                  "en/features/sections/sg-chat-concierge",
+                  "en/features/sections/sg-fit-playroom"
+                ]
+              },
+              "en/features/japan-ec"
+            ]
+          },
+          {
+            "group": "Integrations",
+            "pages": [
+              "en/integrations/sugoi-chat",
+              "en/integrations/mysize"
+            ]
+          },
+          {
+            "group": "For Developers",
+            "pages": [
+              "en/developers/architecture"
+            ]
+          },
+          {
+            "group": "More",
+            "pages": [
+              "en/changelog"
+            ]
+          }
         ]
       }
     ]

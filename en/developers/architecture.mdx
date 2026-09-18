@@ -1,0 +1,84 @@
+---
+title: Architecture
+description: Unmodified Dawn vendoring + overlay + build-time filtering — the technical composition of SUGOI Theme
+---
+
+This chapter is a technical overview for developers implementing or customizing SUGOI Theme.
+
+## Core concept
+
+SUGOI Theme **vendors Shopify's official Dawn theme without altering a single byte**, layers SUGOI-built sections on top **as an overlay**, and at build time
+
+- **(a) narrows the shipped languages to ja / en** (avoiding Shopify's limit of 3,400 translations per locale file), and
+- **(b) filters the shipped sections by industry preset**
+
+The result is a single theme pack that passes `shopify theme check --fail-level error` with zero errors.
+
+## Design philosophy
+
+| Principle | What it means |
+|---|---|
+| **Defensive & Non-Invasive** | Dawn's standard code is left unmodified wherever possible. New functionality is extracted into snippets, and changes to a section stay at "one added render line" |
+| **Build-Time Switching** | The source holds everything (`src/` + `overlay/`); the output is a preset-filtered `dist/`. Unused Liquid files and translation keys are never uploaded to Shopify's servers |
+| **No Runtime Bloat** | No runtime bloat. Features an industry does not use simply do not exist at shipping time |
+
+The reason for keeping Dawn unmodified is simple: Dawn's upgrade guidance is `git merge`, and "editing existing files forces manual conflict resolution every time, while adding new files merges automatically." The overlay approach minimizes that follow-along cost.
+
+## Overlay and composition order
+
+The build composes files in a last-write-wins priority order:
+
+| Step | Source | Priority |
+|---|---|---|
+| 2 | `src/core/dawn/` (virgin Dawn) | 1 (lowest) |
+| 3 | `src/core/common/` (shared across industries) | 2 |
+| 4 | `src/packages/<pkg>/` (industry packages) | 3 |
+| 4.6 | **`overlay/sugoi/` (SUGOI development source)** | 4 (highest) |
+
+When a Dawn file must be replaced, place it at the same relative path under `overlay/sugoi/` with an override marker (target, reason, sync date). When Dawn is bumped, fold the upstream changes into the files you override.
+
+## Naming conventions (prefixes)
+
+File name prefixes control each part's role and how the build treats it:
+
+| Prefix | Category | Build handling | Purpose |
+|---|---|---|---|
+| None | Core | Always kept | Dawn-derived parts and shared infrastructure |
+| `c-` | Common | Always kept | Internal cross-cutting logic (mostly snippets) |
+| `sg-` | SUGOI Official | Curated | Official general-purpose sections visible to merchants |
+| `i-` | Industry | Curated | Industry-specific features |
+| `p-` | Premium | Curated | Higher-tier exclusive features |
+| `x-` | Experimental | **Fully removed in production builds** | Experimental features |
+
+## Translation management (i18n)
+
+- Dawn's standard translation keys are used as-is
+- Custom features get their own namespace keys, and schema labels are written as `t:` references
+- At build time, locale JSON is generated keeping only the keys actually used plus a whitelist (tree shaking)
+
+## Quality gates
+
+A release ships only when all of the following pass:
+
+- `shopify theme check --fail-level error` — zero errors
+- E2E tests on three browser engines (Chromium / Firefox / WebKit)
+- WCAG accessibility checks (axe)
+- Simultaneous ja / en release verification
+
+## Modular section format
+
+Each section is self-contained as a directory:
+
+```
+overlay/sugoi/sections/sg-<name>/
+├── section.liquid      # The section itself
+├── README.md           # Design decisions, setup steps, data contract
+├── assets/             # Section-specific CSS / JS
+└── i18n/
+    ├── schema.ja.json  # Schema label translations
+    ├── schema.en.json
+    ├── template.ja.json
+    └── template.en.json
+```
+
+At build time the tree is flattened into Shopify's standard layout (`sections/`, `assets/`, `locales/`).

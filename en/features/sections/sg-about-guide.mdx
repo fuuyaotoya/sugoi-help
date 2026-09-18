@@ -1,0 +1,39 @@
+---
+title: About Guide
+description: A staged how-to guide following the purchase journey. Stages run from before ordering through delivery, returns, and cancellation, with jump chips for each stage
+---
+
+A guide section for About pages that explains the purchase journey stage by stage. Stages are arranged in real order-of-life order — "before ordering → shipping → arrival → returns" — and a chip navigation can jump to each stage.
+
+![The about guide section with stage blocks](/en/images/sg-about-guide.png)
+
+## How to add it
+
+Open the theme editor (in the admin: "Online store → Themes → Customize"), and in the template of the page you use for About, choose **"About guide"** from "Add section". It can be added to any page type (except header and footer areas). Proven on About pages (the `page.about` template).
+
+## Settings
+
+- **Eyebrow label**: A small gold English-style label shown above the heading. Hidden when blank
+- **Heading**: The section heading
+- **Introduction**: Text introducing the whole guide (rich text)
+- **Show anchor navigation**: Shows chips that jump to each stage. Displayed when two or more stages have headings (default ON)
+- **Closing text**: The wrap-up placed after all stages (rich text)
+- **Closing link label**: The text of the button placed in the closing block. Blank hides the link button (useful for pointing to the Specified Commercial Transactions Act page or a contact page)
+- **Closing link URL**: Where the button links
+- **Color scheme**: The section's color scheme
+- **Padding (top) / Padding (bottom)**: Padding above and below the section (default 36 / 48)
+
+## Blocks
+
+### Stage (limit 12)
+
+One stage of the guide. Stages display in the order arranged, top to bottom.
+
+- **Stage label (English)**: The gold English-style label (e.g., SHIPPING)
+- **Stage heading**: The heading for this stage (e.g., About shipping)
+- **Lead text**: A one-line summary shown above the body
+- **Stage body**: The detailed explanation for this stage (rich text)
+
+<Note>
+Stage bodies are rich text, so you can edit them freely in the theme editor. We recommend keeping the source of truth for policies in the admin under "Settings → Policies" and putting shopper-friendly explanations here.
+</Note>

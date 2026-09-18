@@ -1,0 +1,97 @@
+---
+title: Frequently Asked Questions (FAQ)
+description: An FAQ page section that lists questions automatically from the faq_entry metaobject. Supports search, category filtering, and structured data — only questions published in the admin are shown
+---
+
+A section for rendering a Frequently Asked Questions page. The source of truth for questions is the **`faq_entry` metaobject** — the section itself has no question input fields in the Theme Editor. Questions registered and published under **Content → Metaobjects** in the admin are displayed automatically, in full.
+
+On stores running SUGOI Chat, the AI chat's FAQ answers also come from the same data. The AI never answers a question that is not on the page (a draft) on its own ([SUGOI Chat integration](/en/integrations/sugoi-chat)).
+
+## Key features
+
+- **Automatic full listing** — every published `faq_entry` is displayed. There is no per-question visibility setting; the metaobject's publish state (draft / published) alone controls what appears
+- **Search box** — filters by question and answer text (runs entirely in the shopper's browser)
+- **Category filter** — category chips are generated automatically from the questions' `category` field
+- **FAQPage structured data** — outputs questions and answers as schema.org FAQPage, supporting rich results in search engines
+- **Contact band** — a card directing shoppers to your contact page can be shown beneath the question list
+
+## How to use it
+
+1. Create the `faq_entry` metaobject definition (in the admin under "Settings → Custom data → Metaobjects")
+2. In the Shopify admin under **Content → Metaobjects → faq_entry**, register your questions and **publish** them
+3. Create a page in the admin and set its template to `page.faq` (a dedicated FAQ template is bundled)
+4. In the Theme Editor, set the contact band's link (usually something like `/pages/contact`)
+
+<Note>
+Questions left in draft do not appear on the storefront. Publishing acts as the approval gate for "okay to show on the site." AI chat answers are also grounded only in published questions.
+</Note>
+
+## Metaobject fields
+
+The `faq_entry` definition needs the following fields.
+
+| Key | Type | Purpose |
+|---|---|---|
+| `question` | Single-line text | The question text. Empty questions are excluded from both display and count |
+| `answer` | Rich text | The answer body |
+| `category` | Single-line text | The category name. Blank entries go into the unlabeled trailing group |
+| `sort_order` | Number | Display order |
+| `source` | Single-line text | Source note (internal). Never output to the storefront |
+
+### Category operations
+
+Category chips and group headings are generated automatically from the questions' `category` values. To keep inconsistent spellings from multiplying chips, we recommend operating with these canonical labels:
+
+| Label | Intended coverage |
+|---|---|
+| Orders & payments | Ordering, payment methods, cancellations, changes |
+| Shipping | Shipping fees, delivery times, tracking, gift wrapping |
+| Products & stock | Sizing, materials, availability, restocks |
+| Returns & exchanges | Return policy, exchange procedure |
+| Accounts & membership | Login, member benefits |
+
+Questions with no category set appear in an unlabeled group at the end.
+
+### Display order (sort_order)
+
+We recommend keeping `sort_order` values **unique, in steps of 10** (10, 20, 30, ...). Ordering among equal values is not guaranteed, so unique values make the display order deterministic. When inserting between existing entries, avoid intermediate values like 15 — shift the later entries down instead and keep the 10-step spacing.
+
+## Section settings
+
+| Setting | Type | Default | Description |
+|---|---|---|---|
+| Intro text | Rich text | Empty | Explanatory text shown above the question list. Hidden when blank |
+| Show search box | Checkbox | ON | Not shown when JavaScript is disabled (the question list still displays) |
+| Show category filter | Checkbox | ON | Hidden when fewer than two valid categories exist |
+| Open the first question by default | Checkbox | OFF | Expands the first answer on page load |
+| Show contact band | Checkbox | ON | Hidden when the link is blank |
+| Contact page link | URL | Empty | Usually something like `/pages/contact` |
+| Show chat prompt | Checkbox | ON | Shown only when the chat endpoint is configured in theme settings |
+| Output FAQPage structured data | Checkbox | ON | Outputs questions and answers as schema.org FAQPage |
+| Color scheme | Color scheme | scheme-1 | The section's colors |
+| Contact band color scheme | Color scheme | scheme-3 | The band's colors. Defaults to an inverted scheme |
+| Top and bottom padding | Range (px) | 36 / 48 | The section's padding |
+
+## Troubleshooting
+
+**No FAQ entries appear at all**
+
+One of the following is the cause:
+
+- The `faq_entry` metaobject definition has not been created
+- All questions are still in draft (not published)
+- The `question` field is empty
+
+**Category filter chips do not appear**
+
+Check that two or more questions have a category set. With fewer than two valid categories, the chips themselves are hidden.
+
+**The display order shuffles**
+
+Check for duplicate `sort_order` values. Ordering among equal values is not guaranteed.
+
+## Screen preview
+
+![Top of the FAQ page: heading, search box, and category chips](/en/images/sg-faq-top.png)
+
+![The question list grouped by category](/en/images/sg-faq-list.png)

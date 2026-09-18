@@ -1,0 +1,78 @@
+---
+title: SUGOI Chat Integration (AI Chat Concierge)
+description: The AI chat concierge in the bottom-right corner of the storefront — it resolves size, gifting, and delivery questions in conversation and hands the results off to the cart. Setup, features, and pricing
+---
+
+SUGOI Theme stands complete on its own, but combined with the **SUGOI Chat** app, an AI chat concierge comes alive on your storefront. After hours, the chat greets visitors the way a staff member would — a concierge that resolves the three points where shopping stalls (size, gifting, and delivery) through conversation.
+
+![Cart page](/images/phase3-cart.png)
+
+## What it can do
+
+<CardGroup cols={2}>
+  <Card title="Size consulting" icon="ruler">
+    Size candidates narrowed down in conversation carry over to the product page's size selection. Hesitation never makes it back to the page.
+  </Card>
+  <Card title="Gift consulting" icon="gift">
+    From suggesting the right gift inscription for the occasion to settling the noshi placement and packaging type, everything is confirmed in conversation and carried into the order flow.
+  </Card>
+  <Card title="Delivery and timing answers" icon="truck">
+    Answers to "Will it arrive in time?" come from the same rules as the product page's delivery guidance. The design never improvises an answer.
+  </Card>
+  <Card title="Search by image" icon="camera">
+    Visual search that suggests similar products from photos shoppers take themselves.
+  </Card>
+  <Card title="Order status lookup" icon="package">
+    For signed-in shoppers, the chat answers the delivery status of their recent orders (WISMO — "Where is my order?").
+  </Card>
+  <Card title="FAQ-grounded answers" icon="book">
+    Delivery and returns questions are answered from the text of your published FAQ. The chat never invents policy.
+  </Card>
+</CardGroup>
+
+It also handles best-seller ranking questions, outfit suggestions, product consultations comparing favorites, and escalation to human support (only for answers that could not be grounded in a source). Every reply carries a source chip — such as "Source: product data / delivery rules" — so shoppers can verify where the answer came from.
+
+## Enabling it on the theme side
+
+After installing the SUGOI Chat app on your store, connect it from the theme:
+
+1. Install SUGOI Chat and note the connection URL the app gives you
+2. In theme settings → **AI chat integration**, enter it in "AI chat connection URL"
+3. Save
+
+Until it is configured, the chat UI **outputs nothing** (a fail-closed design). You can proceed with other settings without worrying about misfires.
+
+## Theme-side settings
+
+In theme settings (**Theme settings → AI chat integration**) you configure the connection URL, privacy-related options, the sources for rankings and outfit suggestions, and sales measurement. For the details of each setting, see [AI chat integration (theme settings guide)](/en/theme-settings/chat).
+
+## Answers on delivery and timing
+
+Questions like "Will it arrive in time?" get answers consistent with the delivery guidance shown on the product page. Delivery-date calculation rules are managed on the companion app side, so the chat never improvises. The theme-side display is configured in the [Shipping & fees section](/en/features/sections/sg-shipping-info).
+
+## Privacy and safe design
+
+- All chat reply text and product data are strictly safe-rendered (no HTML injection possible)
+- Order-status answers use only the minimum — order number, status, tracking URLs. Names, addresses, email addresses, and phone numbers are never included
+- Shopper preferences (such as size) are saved only when the on-screen consent checkbox is ON
+- Settings that would pass personal information to the AI (`sg_chat_customer_hint` / `sg_chat_order_context`) default to OFF
+
+## Pricing
+
+| | Free | Standard | Pro |
+|---|---|---|---|
+| Base fee | $0 | **$39 / 30 days** | **$99 / 30 days** |
+| Primary use | Trying it out | Serving shoppers | Concierge + morning report + owner and staff consulting |
+| Concierge allowance | 30 / month | **500 / 30 days** | **2,000 / 30 days** |
+| Image search | 5 / month | Included (same allowance as concierge) | Included (same allowance as concierge) |
+| Image search index size | — | Up to 1,000 products | Up to 5,000 products |
+| Morning AI report | — | — | Auto-generated once a day |
+| Owner/staff consulting AI | — | — | Included (200 requests/day) |
+| Overage | None (stops at the limit) | $0.08 each (enable with a chosen cap) | $0.08 each (enable with a chosen cap) |
+| Free trial | — | 14 days | 14 days |
+
+One "use" = one successfully completed concierge handling per shopper message (one text reply or one image search). Internal AI retrieval and generation do not count. Overage is OFF by default and is billed only when the store explicitly enables it with a chosen cap on additional charges ($20 / $50 / $100).
+
+<Note>
+Prices and allowances reflect the initial release at the time this guide was written. Check the App Store listing for current pricing.
+</Note>
