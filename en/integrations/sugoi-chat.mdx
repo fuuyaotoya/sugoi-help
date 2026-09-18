@@ -14,10 +14,10 @@ SUGOI Theme stands complete on its own, but combined with the **SUGOI Chat** app
     Size candidates narrowed down in conversation carry over to the product page's size selection. Hesitation never makes it back to the page.
   </Card>
   <Card title="Gift consulting" icon="gift">
-    From suggesting the right gift inscription for the occasion to settling the noshi placement (inner or outer) and packaging type, everything is confirmed in conversation and carried into the order flow.
+    From suggesting the right gift inscription for the occasion to settling the noshi placement and packaging type, everything is confirmed in conversation and carried into the order flow.
   </Card>
   <Card title="Delivery and timing answers" icon="truck">
-    Answers to "Will it arrive in time?" come from the same rules as the product page's delivery estimate. The design never improvises an answer.
+    Answers to "Will it arrive in time?" come from the same rules as the product page's delivery guidance. The design never improvises an answer.
   </Card>
   <Card title="Search by image" icon="camera">
     Visual search that suggests similar products from photos shoppers take themselves.
@@ -36,33 +36,19 @@ It also handles best-seller ranking questions, outfit suggestions, product consu
 
 After installing the SUGOI Chat app on your store, connect it from the theme:
 
-1. Install SUGOI Chat and note the chat backend endpoint URL
-2. In Theme settings → **SUGOI AI chat**, set the URL in `sg_chat_endpoint`
+1. Install SUGOI Chat and note the connection URL the app gives you
+2. In theme settings → **AI chat integration**, enter it in "AI chat connection URL"
 3. Save
 
 Until it is configured, the chat UI **outputs nothing** (a fail-closed design). You can proceed with other settings without worrying about misfires.
 
-## Key theme-side settings
+## Theme-side settings
 
-| Setting | Where | Meaning |
-|---|---|---|
-| `sg_chat_endpoint` | Theme settings | Chat backend URL. Unset = hidden |
-| `sg_chat_streaming` | Theme settings | Whether to use streaming display (SSE) |
-| `sg_chat_customer_hint` | Theme settings | Send a logged-in customer hint (default OFF) |
-| `sg_chat_order_context` | Theme settings | Send recent-order context needed for order-status answers (default OFF; designed to exclude personal information) |
-| `sg_chat_cart_attributes` | Theme settings | How chat-driven sales are measured (off / ajax / backend) |
-| `sg_chat_save_preferences` | Theme settings | Consent-based preference-saving UI (default ON) |
-| `sg_chat_context_recent` | Theme settings | Use "recently viewed products" as chat context (default ON) |
-| `sg_chat_ranking_collection` | Theme settings | Source collection for ranking answers |
-| `sg_chat_looks_collections` | Theme settings | Source collections for outfit suggestions (CSV) |
-| `greeting` | Section settings | Opening greeting text (blank = default message) |
-| `color_scheme` | Section settings | Panel color scheme |
+In theme settings (**Theme settings → AI chat integration**) you configure the connection URL, privacy-related options, the sources for rankings and outfit suggestions, and sales measurement. For the details of each setting, see [AI chat integration (theme settings guide)](/en/theme-settings/chat).
 
-## Delivery rule synchronization
+## Answers on delivery and timing
 
-The chat's delivery-date calculation and the theme's delivery estimate badge (`i-delivery-promise`) run on the **same algorithm and the same data**. The rules JSON for holidays and region-specific shipping days is shared between the theme and the chat backend, so "the product page and the chat disagree" is structurally impossible.
-
-See [Metafield setup](/en/setup/metafields/definitions) for the delivery metafield definitions (production days and shipping class). If you change the rules, the `delivery-rules.json` on both sides must be updated together (theme-side updates are delivered to you by the provider).
+Questions like "Will it arrive in time?" get answers consistent with the delivery guidance shown on the product page. Delivery-date calculation rules are managed on the companion app side, so the chat never improvises. The theme-side display is configured in the [Shipping & fees section](/en/features/sections/sg-shipping-info).
 
 ## Privacy and safe design
 
@@ -88,5 +74,5 @@ See [Metafield setup](/en/setup/metafields/definitions) for the delivery metafie
 One "use" = one successfully completed concierge handling per shopper message (one text reply or one image search). Internal AI retrieval and generation do not count. Overage is OFF by default and is billed only when the store explicitly enables it with a chosen cap on additional charges ($20 / $50 / $100).
 
 <Note>
-  Prices and allowances reflect the initial release at the time this guide was written. Check the App Store listing for current pricing.
+Prices and allowances reflect the initial release at the time this guide was written. Check the App Store listing for current pricing.
 </Note>

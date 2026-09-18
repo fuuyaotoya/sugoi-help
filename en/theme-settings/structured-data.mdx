@@ -1,0 +1,30 @@
+---
+title: Product Info for Search
+description: Settings for the returns and shipping information (structured data) provided to search engines like Google
+---
+
+## What product info for search is
+
+Configure the returns and shipping information output on product pages as **structured data (JSON-LD)**. This is an SEO setting that makes shipping fees and estimated arrival dates more likely to appear in Google search results. It does not affect how the live store looks.
+
+In the theme editor, open **Theme settings → Product info for search**.
+
+## Target country
+
+**Returns and shipping target country** — Enter a two-letter country code (Japan is `JP`). Blank also uses `JP`. Only the configured country is included in the search-facing data.
+
+## Return policy
+
+**Number of days returns are accepted** — Enter the number of days after delivery during which returns are accepted. Blank outputs no search-facing return information. Keep it consistent with your store's actual return terms.
+
+## Shipping information
+
+**Shipping fee for search-facing info** — Enter in the store's base currency's smallest unit. Even in Japanese yen, ¥800 is entered as `80000`. Blank outputs no shipping information. Prices are not auto-converted for foreign markets.
+
+**Days to ship, minimum / maximum** — Days from order to shipment. Included in the search-facing data **only when both minimum and maximum are entered**.
+
+**Days in transit after shipment, minimum / maximum** — Days from shipment to arrival. Likewise output only when both are entered.
+
+<Note>
+Leaving these settings blank has no effect whatsoever on the theme's behavior or display. The only consequence is that the information is not provided to search engines.
+</Note>

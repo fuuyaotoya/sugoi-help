@@ -17,7 +17,7 @@ On stores running SUGOI Chat, the AI chat's FAQ answers also come from the same 
 
 ## How to use it
 
-1. Create the `faq_entry` metaobject definition (see [Metafield setup](/en/setup/metafields))
+1. Create the `faq_entry` metaobject definition (in the admin under "Settings → Custom data → Metaobjects")
 2. In the Shopify admin under **Content → Metaobjects → faq_entry**, register your questions and **publish** them
 3. Create a page in the admin and set its template to `page.faq` (a dedicated FAQ template is bundled)
 4. In the Theme Editor, set the contact band's link (usually something like `/pages/contact`)
@@ -28,7 +28,7 @@ Questions left in draft do not appear on the storefront. Publishing acts as the 
 
 ## Metaobject fields
 
-The `faq_entry` definition needs the following fields (see [creating definitions](/en/setup/metafields/definitions)).
+The `faq_entry` definition needs the following fields.
 
 | Key | Type | Purpose |
 |---|---|---|
@@ -81,10 +81,6 @@ One of the following is the cause:
 - The `faq_entry` metaobject definition has not been created
 - All questions are still in draft (not published)
 - The `question` field is empty
-
-**Questions from the 51st onward do not appear**
-
-By specification, up to 50 entries are shown per page (it does not error). If you expect more than 50, split them across pages or handle it operationally.
 
 **Category filter chips do not appear**
 
