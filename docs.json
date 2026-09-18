@@ -1,0 +1,27 @@
+{
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "SUGOI Theme",
+  "theme": "mint",
+  "colors": {
+    "primary": "#0F5C43",
+    "light": "#1A7A5A",
+    "dark": "#0A4231"
+  },
+  "favicon": "/favicon.svg",
+  "navigation": {
+    "languages": [
+      {
+        "language": "ja",
+        "groups": [
+          { "group": "はじめに", "pages": ["index"] }
+        ]
+      },
+      {
+        "language": "en",
+        "groups": [
+          { "group": "Getting Started", "pages": ["en/index"] }
+        ]
+      }
+    ]
+  }
+}
